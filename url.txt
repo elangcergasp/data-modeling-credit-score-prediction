@@ -1,0 +1,6 @@
+
+URL Dataset: https://drive.google.com/file/d/12JuLj3U7QehWJ3uNP4a0o-eSLTdIoR--/view?usp=sharing
+
+URL Model: https://drive.google.com/file/d/1QI5RY1j5Sqyt-3L43Zn2KE9CPKruo-mM/view?usp=sharing
+
+URL Deployment: https://huggingface.co/spaces/elangcergasp/ftds-p1m2-credit-score

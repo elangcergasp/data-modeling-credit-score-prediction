@@ -1,0 +1,36 @@
+
+Conceptual Problems
+
+Nama  : Elang Cergas Pembrani
+
+--------------------------------------------------
+
+1. Jelaskan latar belakang adanya bagging dan cara kerja bagging !
+
+Bagging adalah teknik pemodelan supervised learning di mana suatu dataset utuh akan dipecah menjadi subset-subset kecil, kemudian satu model yang sama akan dilakukan training terhadap beberapa kombinasi berbeda dari subset-subset tersebut. Hal ini dilakukan supaya model yang dihasilkan tidak terjadi overfit.
+
+Misal ada satu model Decision Tree yang setelah dilakukan training terhadap dataset A mengalami overfit terhadap keseluruhan data. Maka kemudian data dipecah menjadi subset-subset kecil, misal subset 1 - 100.
+Di sini teknik bagging akan menduplikasi model yang sama, tetapi dilakukan training ulang terhadap kombinasi dari subset-subset tersebut.
+Misal model Decision Tree pertama dilakukan training terhadap kombinasi subset [1, 2, 3, 4]. Kemudian model Decision Tree kedua dilakukan training terhadap kombinasi subset [1, 3, 5, 7]. Dengan adanya kombinasi ini, maka model pertama dengan kedua ada irisan subset yang seragam, yaitu [1, 3]. Akan tetapi karena ada sedikit perbedaan kombinasi, maka meskipun model pertama maupun kedua mengalami overfit terhadap kombinasi subset, tetapi karena setiap model tidak memiliki informasi terhadap keseluruhan data maka bisa diasumsikan bahwa model prediksi yang dihasilkan tidak sama persis. Dari sinilah penanggulangan overfit diraih, karena prediksi akhir akan dilakukan dengan cara voting terhadap hasil prediksi beberapa model dengan hyperparameter yang sama, namun data training "yang berbeda".
+
+
+--------------------------------------------------
+
+2. Jelaskan perbedaan cara kerja algoritma Random Forest dengan algoritma boosting yang Anda pilih !
+
+Algoritma Random Forest bekerja dengan cara melakukan bagging dengan model Decision Tree, di mana setiap model Decision Tree dibuat ramping dengan membatasi ukuran "pohon keputusan" yang dihasilkan. Misalnya setiap model Decision Tree dibatasi kedalamannya atau dibatasi jumlah leaf node nya (pohon menjadi "pendek/lemah").
+Untuk mengimbangi Decision Tree yang "pendek", maka Random Forest membuat banyak model Decision Tree. Jadi Random Forest adalah algoritma bagging dengan menggabungkan banyak model Decision Tree yang "pendek/lemah", sehingga kombinasi yang dihasilkan menjadi "kuat".
+
+Sedangkan algoritma boosting yang saya pilih adalah AdaBoost dengan Decision Tree. AdaBoost bekerja dengan cara melakukan iterasi training model dengan hyperparameter "lemah" terhadap subset data training yang berbeda-beda. Pada setiap iterasi, AdaBoost akan memberikan prioritas/weight yang lebih tinggi pada label target yang salah/tidak sesuai label asli. Dengan demikian, model yang "lemah" dapat lebih fokus terhadap label yang salah sasaran, sehingga dapat meningkatkan performa model.
+
+
+--------------------------------------------------
+
+3. Jelaskan apa yang dimaksud dengan Cross Validation !
+
+Cross Validation adalah teknik evaluasi model untuk menguji apakah model dapat bekerja dengan baik pada data inferensi yang belum pernah dilihat. Cross Validation bekerja dengan cara data akan dibagi menjadi beberapa subset tertentu, kemudian untuk setiap subset model akan dilakukan training pada subset sisanya dan dilakukan test prediksi pada subset tersebut.
+Misal data dibagi menjadi lima subset dengan ukuran sama [A, B, C, D, E]. Maka kemudian untuk subset A, model akan dilakukan training terhadap kombinasi subset [B, C, D, E]. Setelah training model akan dites terhadap subset A.
+Kemudian untuk subset B, model akan dilakukan training terhadap kombinasi subset [A, C, D, E]. Setelah training model akan dites terhadap subset B.
+Begitu seterusnya hingga semua subset telah ter-iterasi. Kemudian hasil cross validation adalah nilai rata-rata dari skor penilaian test prediksi untuk setiap model subset yang telah dilatih. Pada contoh di atas, nilai cross validation didapat dari rata-rata skor terhadap subset A, B, C, D, E.
+Tujuan dilakukan cross validation adalah untuk mencegah overfitting.
+
